@@ -1,0 +1,38 @@
+.coluna-login{
+  width: 100%;
+  max-width: 1120px;
+  height: 100vh;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+ 
+}
+
+
+.coluna-login .form-login {
+  width: 100%;
+  height: 400px;
+  background: #fff;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.coluna-login .form-login form{
+  width: 100%;
+  padding: 10px;
+}
+
+.coluna-login .form-login img{
+  width: 100px;
+}
+
+.coluna-login .form-login button{
+  margin-top: 20px;
+}
