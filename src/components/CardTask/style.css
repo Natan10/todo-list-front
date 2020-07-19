@@ -2,3 +2,14 @@
   width: 100%;
   margin-bottom: 10px;
 }
+
+p {
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+button{
+  float:right;
+  margin-right:10px;
+}

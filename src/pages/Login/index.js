@@ -53,7 +53,7 @@ function Login(){
               </Form.Group>
   
               <Form.Group controlId="formBasicPassword">
-                <Form.Label>Token</Form.Label>
+                <Form.Label>Passwor</Form.Label>
                 <Form.Control type="password" placeholder="Password" onChange={(e)=> setToken(e.target.value) } />
               </Form.Group>
               <Button variant="success" size="md" block type="submit">

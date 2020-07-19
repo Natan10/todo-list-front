@@ -14,7 +14,6 @@ export default function NewTask(){
   const [name,setName] = useState('');
   const [priority,setPriority] = useState('');
   const [description,setDescription] = useState('');
-  const [status,setStatus] = useState(false);
 
   async function handleCreate(e){
     e.preventDefault();
@@ -23,7 +22,7 @@ export default function NewTask(){
       name,
       priority,
       description,
-      status
+      status: false
     }
 
     try {
