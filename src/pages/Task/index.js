@@ -15,45 +15,30 @@ function Task(){
   const [tasks, setTasks] = useState([]);
   const [taskFilter, setFilterTasks] = useState([]);
   
-  const userEmail = localStorage.getItem('X-User-Email');
-  const userToken = localStorage.getItem('X-User-Token');
-
+  
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     try {
-     const response = await api.get('tasks',{
-        headers: {
-          'X-User-Email': userEmail,
-          'X-User-Token': userToken,
-        }
-      })
-
-      setTasks(response.data);
-      setFilterTasks(response.data);
-     
+     const response = await api.get('/tasks')
+     setTasks(response.data);
+     setFilterTasks(response.data); 
     } catch (error) {
-      alert('Erro ao carregar Tasks.')
+      toast.error("Erro ao carregar tasks!")
     }
-  },[userEmail, userToken]);
+  },[]);
 
 
 
    const handleUpdate = async (state) => {
      try{ 
-        await api.put(`tasks/${state[0]}`,{
-         status: state[1]
-       },{
-         headers:{
-           'X-User-Email':userEmail,
-           'X-User-Token':userToken
-         }
-       });
-       
-       const updateTasks = tasks.map(item => 
+      await api.put(`tasks/${state[0]}`,{status: state[1]});
+      
+      const updateTasks = tasks.map(item => 
         (item.id === state[0] ? { ...item, status: state[1] } : item));
-        setTasks(updateTasks);
-        setFilterTasks(updateTasks);
-        toast.success("Task atualizada com sucesso!");
+      setTasks(updateTasks);
+      setFilterTasks(updateTasks);
+
+      toast.success("Task atualizada com sucesso!");
      }catch(error){
       toast.error("Erro ao atualizar a task!");
      }
@@ -61,17 +46,11 @@ function Task(){
 
    const handleDelete = async (id) => {
     try{ 
-       await api.delete(`tasks/${id}`
-       ,{
-        headers:{
-          'X-User-Email':userEmail,
-          'X-User-Token':userToken
-        }
-      });
-      
+      await api.delete(`tasks/${id}`);
       const deleteTasks = tasks.filter(item => item.id !== id);
       setTasks(deleteTasks);
       setFilterTasks(deleteTasks);
+
       toast.success("Task deletada com sucesso!");
     }catch(error){
       toast.error("Erro ao deletar a task!");
@@ -79,8 +58,12 @@ function Task(){
   } 
 
   const filterTask = (filterName) => {
-    const taskFilter = tasks.filter(task => task.priority === filterName)
-    setFilterTasks(taskFilter);
+    if(filterName === 'todas'){
+      setFilterTasks(tasks);
+    }else{
+      const taskFilter = tasks.filter(task => task.priority === filterName)
+      setFilterTasks(taskFilter);
+    }
   }
 
   return(
@@ -90,7 +73,7 @@ function Task(){
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            logado como: <a href="#login">{userEmail}</a>
+              logado como: <a href="#login">{localStorage.getItem("uid")}</a>
           </Navbar.Text>
         </Navbar.Collapse>
       </Navbar>
@@ -99,6 +82,7 @@ function Task(){
         <h1>Suas Tarefas</h1>
         <ButtonToolbar className="button_group"  aria-label="Toolbar with button groups">
           <ButtonGroup className="mr-2" aria-label="First group">
+            <Button value="todas" onClick={(e)=>filterTask(e.target.value)} >Todas</Button>
             <Button value="relaxado" onClick={(e)=>filterTask(e.target.value)} >Relaxado</Button> 
             <Button value="moderado" onClick={(e)=>filterTask(e.target.value)} >Moderado</Button> 
             <Button value="urgente" onClick={(e)=>filterTask(e.target.value)} >Urgente</Button> 

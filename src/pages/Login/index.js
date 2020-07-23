@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import {Form,Button,Container,Row,Col} from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { ToastContainer,toast } from 'react-toastify';
 
 import api from '../../services/api';
+import * as storage from '../../services/localStorage';
 
 import './style.css';
 import logo from '../../assets/logo.png';
@@ -12,30 +14,22 @@ function Login(){
   const history = useHistory();
 
   const [email,setEmail] = useState('');
-  const [token,setToken] = useState('');
+  const [password,setPassword] = useState('');
 
   async function handleSubmit(e){
     e.preventDefault();
-    const data = {
-      email,
-      token
-    }
-
     try{
-      const response = await api.get('/session',{
-        headers: {
-          'X-User-Email':data.email,
-          'X-User-Token':data.token,
-        }
+      const response = await api.post('auth/sign_in',{
+        "email": email,
+        "password": password,
       });
-      
-      if(response.data.login == 'ok') {
-        localStorage.setItem('X-User-Email',data.email);
-        localStorage.setItem('X-User-Token',data.token);
-        history.push('/task');
-      }
+      storage.setAccessToken(response.headers['access-token']);
+      storage.setClient(response.headers.client);
+      storage.setUid(response.headers.uid);
+      history.push('/task');
+      toast.success("Login efetuado com sucesso!")
     }catch(e){
-      alert('Erro ao logar!')
+      toast.error("Erro ao logar, tente novamente!")
     }
   }
 
@@ -54,15 +48,31 @@ function Login(){
   
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Passwor</Form.Label>
-                <Form.Control type="password" placeholder="Password" onChange={(e)=> setToken(e.target.value) } />
+                <Form.Control type="password" placeholder="Password" onChange={(e)=> setPassword(e.target.value) } />
               </Form.Group>
-              <Button variant="success" size="md" block type="submit">
-                Entrar
-              </Button>
+              <Form.Group >
+                <Button variant="success" size="md" block type="submit">
+                  Entrar
+                </Button>
+              </Form.Group>
             </Form>
           </div>
         </Col>
       </Row>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        />
+        {/* Same as */}
+      <ToastContainer />
     </Container>
   );
 }
