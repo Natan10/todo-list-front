@@ -31,12 +31,12 @@ function Task(){
 
    const handleUpdate = async (state) => {
      try{ 
-      await api.put(`tasks/${state[0]}`,{status: state[1]});
+      await api.put(`tasks/${state.id}`,state);
       
-      const updateTasks = tasks.map(item => 
-        (item.id === state[0] ? { ...item, status: state[1] } : item));
-      setTasks(updateTasks);
-      setFilterTasks(updateTasks);
+    //  const updateTasks = tasks.map(item => 
+    //    (item.id === state[0] ? { ...item, status: state[1] } : item));
+    //  setTasks(updateTasks);
+    //  setFilterTasks(updateTasks);
 
       toast.success("Task atualizada com sucesso!");
      }catch(error){

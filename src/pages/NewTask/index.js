@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {Container,Row,Col,Form,Button} from 'react-bootstrap';
-
+import { ToastContainer,toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import api from '../../services/api';
 
@@ -26,16 +26,11 @@ export default function NewTask(){
     }
 
     try {
-      const response = await api.post('/tasks',data,{
-        headers:{
-          'X-User-Email': localStorage.getItem('X-User-Email'),
-          'X-User-Token': localStorage.getItem('X-User-Token'),
-        }
-      });
-
+      await api.post('/tasks',data);
       history.push('/task');
+      toast.success("Task criada com sucesso!")
     } catch (error) {
-      alert('Erro ao criar task.');
+      toast.error("Erro ao criar task!")
     }
 
   }
@@ -71,6 +66,20 @@ export default function NewTask(){
           </div>
         </Col>
       </Row>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        />
+        {/* Same as */}
+      <ToastContainer />
     </Container>
   );
 
