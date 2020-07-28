@@ -18,7 +18,6 @@ api.interceptors.request.use(config => {
 });
 
 api.interceptors.response.use((res)=>{
-  console.log('response',res)
   if(res.headers['access-token'] !== storage.getAccessToken() && res.headers['access-token'] !== ''){
     storage.setAccessToken(res.headers['access-token'])
     storage.setClient(res.headers.client)
