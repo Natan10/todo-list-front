@@ -13,8 +13,9 @@ import TaskModal from '../../components/TaskModal';
 
 
 
-
 function Task(){
+
+  
   const [tasks, setTasks] = useState([]);
   const [taskFilter, setFilterTasks] = useState([]);
   const [modalShow,setModalShow] = useState(false);
@@ -31,10 +32,6 @@ function Task(){
     }
   },[]);
 
-
-   const handleCreateTask = (data) =>{
-     console.log(data)
-   }
 
 
    const handleUpdate = async (state) => {
@@ -82,9 +79,6 @@ function Task(){
             <Button value="moderado" onClick={(e)=>filterTask(e.target.value)} >Moderado</Button> 
             <Button value="urgente" onClick={(e)=>filterTask(e.target.value)} >Urgente</Button> 
             <Button onClick={() => setModalShow(true)}>
-              {/*<Link to='/newtask'>
-                Criar Tarefa 
-            </Link>*/}
               Criar Tarefa
             </Button>
           </ButtonGroup>
@@ -102,7 +96,6 @@ function Task(){
                           />
           ))
         }
-      <ModalTask show={modalShow} onHide={()=> setModalShow(false)} handleCreatePoha={handleCreateTask}/>
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -116,61 +109,13 @@ function Task(){
         />
         {/* Same as */}
       <ToastContainer />
-      </div>
+
+      <TaskModal setModalShow={setModalShow} modalShow={modalShow} />
+     </div>
     </>
   );
 }
 
 
-const ModalTask = (props) => {
-
-  const [name,setName] = useState('');
-  const [priority,setPriority] = useState('');
-  const [description,setDescription] = useState('');
-
-  const handleCreateTask = () => {
-    props.handleCreatePoha({name,priority,description})
-  }
-  console.log(props)
-  return(
-  <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Nova Tarefa
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form onSubmit={handleCreateTask}>
-          <Form.Group controlId="form__name">
-            <Form.Label>Nome</Form.Label>
-            <Form.Control type="name" placeholder="tarefa ..." onChange={(e) => setName(e.target.value) } />
-          </Form.Group>
-          <Form.Group controlId="form__priority">
-            <Form.Label>Prioridade</Form.Label>
-            <Form.Control as="select" onChange={(e)=> setPriority(e.target.value)}>
-              <option value="urgente">urgente</option>
-              <option value="moderado">moderado</option>
-              <option value="relaxado">relaxado</option>
-            </Form.Control>
-          </Form.Group>       
-          <Form.Group controlId="form__descript">
-            <Form.Label>Descrição</Form.Label>
-            <Form.Control as="textarea" rows="3" onChange={ (e)=> setDescription(e.target.value) }  />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Criar
-          </Button>
-        </Form>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
-    </Modal>)
-}
 
 export default Task;
