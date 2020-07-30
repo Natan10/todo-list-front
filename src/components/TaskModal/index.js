@@ -2,13 +2,14 @@ import React,{useState} from 'react';
 import {Modal,Button,Form} from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
+import PropTypes from 'prop-types';
 import api from '../../services/api';
 
-const  TaskModal = (props) => {
+const  TaskModal = ({modalShow,setModalShow}) => {
+
   const [name,setName] = useState('');
   const [priority,setPriority] = useState('');
   const [description,setDescription] = useState('');
-
 
 
   const handleCreateTask = async (e) => {
@@ -23,12 +24,12 @@ const  TaskModal = (props) => {
 
     try {
       await api.post('/tasks',data);
-      
-      props.setModalShow(false)
+
+      setModalShow(false)
       toast.success("Task criada com sucesso!")
     } catch (error) {
 
-      props.setModalShow(false)
+      setModalShow(false)
       toast.error("Erro ao criar task!")
     }
   }
@@ -39,8 +40,8 @@ const  TaskModal = (props) => {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      show={props.modalShow || false} 
-      onHide={() => props.setModalShow(false)}
+      show={modalShow || false} 
+      onHide={() => setModalShow(false)}
       >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -71,10 +72,22 @@ const  TaskModal = (props) => {
             Criar
           </Button>
         </form>
-        <Button onClick={()=>props.setModalShow(false)}>Close</Button>
+        <Button onClick={()=>setModalShow(false)}>Close</Button>
       </Modal.Footer>
     </Modal>
   )
 }
 
+
+TaskModal.propTypes = {
+  modalShow : PropTypes.bool.isRequired,
+  setModalShow: PropTypes.func,
+}
+
+TaskModal.defaultProps = {
+  modalShow: false,
+}
+
 export default TaskModal;
+
+

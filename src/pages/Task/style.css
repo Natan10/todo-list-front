@@ -1,4 +1,4 @@
-div.teste{
+div.task_main{
   width: 100%;
   max-width: 1120px;
   padding: 10px 0 10px 0;
@@ -10,14 +10,14 @@ div.teste{
 }
 
 
-div.teste h1{
+div.task_main h1{
   color: #fff;
   font-weight: bold;
   font-size: 50px;
   margin: 20px 0 10px 0;
 }
 
-div.teste .button_group{
+div.task_main .button_group{
   margin:10px 0 10px 0;
 }
 

@@ -10,11 +10,11 @@
 
 body{
   font:400 14px Roboto, sans-serif;
-  background: #9159c1;
+  background: linear-gradient(to top,#7B8CE4,#5E74CA);
   -webkit-font-smoothing:antialiased;
 
   width: 100%;
-  height: 90vh;
+  height: 100%;
 }
 
 

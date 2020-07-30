@@ -1,6 +1,5 @@
 import React, { useState,useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import {ButtonGroup,Button,ButtonToolbar,Modal,Form} from 'react-bootstrap';
+import {ButtonGroup,Button,ButtonToolbar} from 'react-bootstrap';
 import { ToastContainer,toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,14 +7,12 @@ import './style.css'
 import api from '../../services/api';
 
 import NavbarTop from '../../components/Navbar';
-import CardTask from '../../components/CardTask';
 import TaskModal from '../../components/TaskModal';
-
+import TaskList from '../../components/TaskList';
 
 
 function Task(){
 
-  
   const [tasks, setTasks] = useState([]);
   const [taskFilter, setFilterTasks] = useState([]);
   const [modalShow,setModalShow] = useState(false);
@@ -70,7 +67,8 @@ function Task(){
     <>
      
       <NavbarTop uid={localStorage.getItem("uid")} />
-      <div className="teste">
+
+      <div className="task_main">
         <h1>Suas Tarefas</h1>
         <ButtonToolbar className="button_group"  aria-label="Toolbar with button groups">
           <ButtonGroup className="mr-2" aria-label="First group">
@@ -83,19 +81,13 @@ function Task(){
             </Button>
           </ButtonGroup>
         </ButtonToolbar>
-        {
-          taskFilter.map(task =>( 
-                <CardTask key={task.id}
-                          id={task.id} 
-                          name={task.name} 
-                          description={task.description}
-                          state={task.status}
-                          priority={task.priority}
-                          handleUpdateTask={handleUpdate}
-                          handleDeleteTask={handleDelete}
-                          />
-          ))
-        }
+        
+        <TaskList taskFilter={taskFilter} 
+                  handleUpdate={handleUpdate} 
+                  handleDelete={handleDelete}/>
+
+        <TaskModal setModalShow={setModalShow} modalShow={modalShow} />
+
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -109,8 +101,6 @@ function Task(){
         />
         {/* Same as */}
       <ToastContainer />
-
-      <TaskModal setModalShow={setModalShow} modalShow={modalShow} />
      </div>
     </>
   );
