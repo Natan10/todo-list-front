@@ -32,7 +32,7 @@ export default function CardTask({id,name,description,priority,state,handleUpdat
           <p>status: {(!stateCard).toString()}</p>
         </Card.Text>
         <Button variant="danger"  onClick={()=> handleDelete() }>Excluir</Button>
-        <Button variant="primary" onClick={()=> handleClick() }>Concluir</Button>
+        <Button variant="success" onClick={()=> handleClick() }>Concluir</Button>
       </Card.Body>
     </Card>
   );
