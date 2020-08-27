@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Form,Button,Container,Row,Col} from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { useHistory,Link} from 'react-router-dom';
 import { ToastContainer,toast } from 'react-toastify';
 
 import api from '../../services/api';
@@ -8,6 +8,8 @@ import * as storage from '../../services/localStorage';
 
 import './style.css';
 import logo from '../../assets/logo.png';
+import background_image from '../../assets/fundo.png';
+
 
 function Login(){
 
@@ -35,45 +37,58 @@ function Login(){
 
 
   return(
-    <Container fluid>
-      <Row className="justify-content-md-center">
-        <Col sm={4} className="coluna-login">
-          <div className="form-login">
-          <img src={logo} alt="logo" />
-            <Form onSubmit={handleSubmit}>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" onChange={(e)=> setEmail(e.target.value) } />
-              </Form.Group>
-  
-              <Form.Group controlId="formBasicPassword">
-                <Form.Label>Passwor</Form.Label>
-                <Form.Control type="password" placeholder="Password" onChange={(e)=> setPassword(e.target.value) } />
-              </Form.Group>
-              <Form.Group >
-                <Button variant="success" size="md" block type="submit">
-                  Entrar
-                </Button>
-              </Form.Group>
-            </Form>
-          </div>
-        </Col>
-      </Row>
+    <div className="login_logo-container">
+      <img className="login_background-image" src={background_image} alt="Background"/>
+      <Container fluid>
+        <Row className="justify-content-md-center">
+          <Col sm={4} className="coluna-login">
+            <div className="form-login">
+            <img src={logo} alt="logo" />
+              <Form onSubmit={handleSubmit}>
+                <Form.Group>
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control type="email" placeholder="Enter email" onChange={(e)=> setEmail(e.target.value) } />
+                </Form.Group>
+    
+                <Form.Group>
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control 
+                      type="password" 
+                      placeholder="Password" 
+                      onChange={(e)=> setPassword(e.target.value) } 
+                  />
+                </Form.Group>
+                <Form.Group className="form-login_footer">
+                  <div className="label">
+                    <Link to="/sign_up">
+                      <Form.Label>Criar conta</Form.Label>
+                    </Link>
+                  </div>
+                  <Button variant="success" type="submit">
+                    Entrar
+                  </Button>
+                </Form.Group>    
+              </Form>
+            </div>
+          </Col>
+        </Row>
 
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        />
-        {/* Same as */}
-      <ToastContainer />
-    </Container>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          />
+          {/* Same as */}
+        <ToastContainer />
+      </Container>
+    </div>
+    
   );
 }
 

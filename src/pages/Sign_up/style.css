@@ -1,19 +1,4 @@
-.login_logo-containerogo{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100vh;
-}
-
-
-.login_logo-container .login_background-image{
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-}
-
-.coluna-login{
+.coluna-signup{
   width: 100%;
   max-width: 1120px;
   height: 100vh;
@@ -27,9 +12,9 @@
 }
 
 
-.coluna-login .form-login {
+.coluna-signup .form-signup {
   width: 100%;
-  height: 400px;
+  height: 450px;
   background: #fff;
   border-radius: 5px;
 
@@ -39,27 +24,38 @@
   justify-content: center;
 }
 
-.coluna-login .form-login form{
+.coluna-signup .form-signup form{
   width: 100%;
   padding: 10px;
 }
 
-.coluna-login .form-login img{
+.coluna-signup .form-signup img{
   width: 100px;
 }
 
-.coluna-login .form-login .form-login_footer{
+.coluna-signup .form-signup .form-signup_footer{
   display: flex;
   justify-content: space-between;
 }
 
-.coluna-login .form-login .form-login_footer .label{
+.coluna-signup .form-signup .form-signup_footer .label{
   display: flex;
   flex-direction: column;
+
   padding: 10px 0;
 }
 
-.coluna-login .form-login .form-login_footer button{
+.coluna-signup .form-signup .form-signup_footer button{
   margin: 0;
   padding: 0 25px;
+}
+
+.coluna-signup .form-signup .form-signup_label{
+  display: flex;
+  justify-content: space-between;
+}
+
+.coluna-signup .form-signup .form-signup_label span{
+  color:red;
+  font-size: 13px;
 }
