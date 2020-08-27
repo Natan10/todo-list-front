@@ -7,7 +7,7 @@ import api from '../../services/api';
 import * as storage from '../../services/localStorage';
 
 import './style.css';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/icons/requirement.svg';
 import background_image from '../../assets/fundo.png';
 
 
@@ -43,7 +43,13 @@ function Login(){
         <Row className="justify-content-md-center">
           <Col sm={4} className="coluna-login">
             <div className="form-login">
-            <img src={logo} alt="logo" />
+              <div className="login_header">
+                <img src={logo} alt="logo" className="login_header-logo"/>
+                <span>
+                  Faça seu login e cadastre suas tarefas
+                </span>
+              </div>
+            
               <Form onSubmit={handleSubmit}>
                 <Form.Group>
                   <Form.Label>Email</Form.Label>

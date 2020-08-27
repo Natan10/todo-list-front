@@ -1,4 +1,4 @@
-.login_logo-containerogo{
+.login_logo-container{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,6 +38,21 @@
   align-items: center;
   justify-content: center;
 }
+
+.coluna-login .form-login .login_header{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 15px auto;
+}
+.coluna-login .form-login .login_header .login_header-logo{
+  width: 80px;
+}
+.coluna-login .form-login .login_header span{
+  margin-top: 10px;
+  font-size: 20px;
+}
+
 
 .coluna-login .form-login form{
   width: 100%;
